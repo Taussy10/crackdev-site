@@ -2,8 +2,8 @@ import Home from "./page/home"
 
 const App = () => {
   return (
-    <div>
-<h1 className="text-3xl font-bold underline text-green-500">
+    <div className=" bg-[#F3F4F6]  min-h-screen">
+<h1 className="text-3xl font-bold underline  text-amber-500">
     Hello Dude!
   </h1>
 
