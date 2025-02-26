@@ -2,7 +2,7 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 const Home = () => {
   return (
-    <div className=' '>
+    <div className='  '>
     <Header />    
     {/* Create two divs
     1. for postion , user and time 
@@ -14,45 +14,77 @@ const Home = () => {
 
 
 {/* Container for both divs  */}
-<div className=' flex
- flex-row items-center  p-4  bg-blue-400'>
+
+{/* bg-blue-400 */}
+<div className=' flex mb-2
+ flex-row items-center  p-4 bg-gray-300 shadow-md   '>
 
       {/* div-1 */}
-      <div className=' bg-green-400 flex 
- flex-row items-center gap-24  justify-between'>
-      <h1 className='font-bold'>Position</h1>
-      <h1 className='font-bold'>User</h1>
-      <h1 className='font-bold'>Time Today</h1>
+      {/* bg-green-400 */}
+      <div className='  flex 
+ flex-row items-center gap-24 p-2  justify-between'>
+      <h1 className='font-bold text-2xl'>Position</h1>
+      <h1 className='font-bold text-2xl'>User</h1>
+      <h1 className='font-bold  text-2xl'>Time</h1>
       </div>
 
-<div className=' bg-amber-500  w-full  p-2 text-center'>
-  <h1 className='font-bold' >Language</h1>
+{/* bg-amber-500 */}
+<div className='   w-full  p-2 text-center'>
+  <h1 className='font-bold text-2xl' >Language</h1>
 </div>
 
 </div>
 
 
 
-{/* Content */}
-<div className=' flex
- flex-row items-center  p-4  bg-blue-400'>
 
-      {/* div-1 */}
-      <div className=' bg-green-400 flex 
-    flex-row items-center gap-24 justify-between'>
-      <h1 className='font-semibold'>#1</h1>
-      <h1 className='font-semibold'>@Taussy10</h1>
-      <h1 className='font-semibold'>365</h1>
+
+{/* Content bg-blue-400 */}
+<div className=' flex bg-blue-400  shadow-md
+ flex-row items-center  px-4 py-2  '>
+
+      {/* div-1 bg-green-400 */}
+      <div className='  flex 
+    flex-row items-center  gap-24 justify-between'>
+      <h1 className='font-semibold text-xl ml-7'>#1</h1>
+      <h1 className=' text-xl font-semibold ml-8'>@Taussy10</h1>
+      <h1 className=' text-xl font-semibold '>365</h1>
       </div>
 
-<div className=' bg-amber-500  w-full  p-2 text-center'>
-  
+{/* bg-amber-500  */}
+<div className='  w-full  p-2 text-center ml-16'>
+
+  {/* div for languages   */}
+  <div className=' flex flex-row items-center   gap-2'>
+
 <div className=' flex flex-row  gap-2 justify-center items-center
-  bg-orange-500 rounded-3xl  p-1  w-28 '>
+  bg-orange-500 rounded-3xl  p-2  w-28 '>
 <h1 className=' text-white   text-base  font-semibold'>HTML</h1>
 <h1 className=' text-white font-semibold text-base'>24m</h1>
 </div>
+<div className=' flex flex-row  gap-2 justify-center items-center
+  bg-yellow-500 rounded-3xl  p-2  w-28 '>
+<h1 className=' text-white   text-base  font-semibold'>JS</h1>
+<h1 className=' text-white font-semibold text-base'>24m</h1>
+</div>
+<div className=' flex flex-row  gap-2 justify-center items-center
+  bg-blue-500 rounded-3xl  p-2   '>
+<h1 className=' text-white   text-base  font-semibold'>Markdown</h1>
+<h1 className=' text-white font-semibold text-base'>24m</h1>
+</div>
+<div className=' flex flex-row  gap-2 justify-center items-center
+  bg-blue-500 rounded-3xl  p-2   '>
+<h1 className=' text-white   text-base  font-semibold'>Markdown</h1>
+<h1 className=' text-white font-semibold text-base'>24m</h1>
+</div>
+<div className=' flex flex-row  gap-2 justify-center items-center
+  bg-blue-500 rounded-3xl  p-2   '>
+<h1 className=' text-white   text-base  font-semibold'>Markdown</h1>
+<h1 className=' text-white font-semibold text-base'>24m</h1>
+</div>
 
+
+    </div>
 
 {/* Divs for languages */}
 
