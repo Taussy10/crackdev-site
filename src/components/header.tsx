@@ -7,7 +7,7 @@ const Header = () => {
   const user = useUser()
   const signedIn = useSignIn()
 
-  console.log("name",user.user?.id)
+  // console.log("name",user.user?.id)
   
   
   
