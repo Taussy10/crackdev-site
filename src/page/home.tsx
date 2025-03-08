@@ -10,14 +10,14 @@ const Home = () => {
     */}
 
     {/* Container for body */}
-    <div className=' mt-6  p-6'>
+    <div className=' mt-2  p-6'>
 
 
 {/* Container for both divs  */}
 
-{/* bg-blue-400 */}
+{/* For labling: username , languge, time all bg-blue-400 */}
 <div className=' flex mb-1
- flex-row items-center  p-4 bg-white  shadow-md  rounded-2xl '>
+ flex-row items-center  p-4 bg-gray-300 shadow-md  rounded-2xl '>
 
       {/* div-1 */}
       {/* bg-green-400 */}
@@ -28,21 +28,19 @@ const Home = () => {
       <h1 className='font-bold  text-2xl'>Time</h1>
       </div>
 
-{/* bg-amber-500 */}
+{/* Div: 2 for languges bg-amber-500 */}
 <div className='   w-full  p-2 text-center'>
   <h1 className='font-bold text-2xl' >Language</h1>
 </div>
-
 </div>
 
 
 
 
 
-{/* Content bg-blue-400 */}
+{/* For Content bg-blue-400 */}
 <div className=' flex    bg-[#eeeeee]  shadow-lg   
  flex-row items-center  px-4 mb-2  rounded-xl  '>
-
       {/* div-1 bg-green-400 */}
       <div className='  flex 
     flex-row items-center  gap-24 justify-between'>

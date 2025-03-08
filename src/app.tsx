@@ -1,14 +1,10 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/react-router'
+import Home from './page/home'
 
 export default function App() {
   return (
-    <header>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </header>
+    <div>
+    <Home/>
+    </div>
   )
 }
