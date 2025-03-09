@@ -3,7 +3,7 @@ import { SignInButton} from "@clerk/clerk-react"
 import { useSignIn  , useUser} from "@clerk/clerk-react"
 
 
-const Header = ({username}) => {
+const Header = () => {
   const user = useUser()
   const signedIn = useSignIn()
 

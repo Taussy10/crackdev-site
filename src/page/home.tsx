@@ -1,16 +1,19 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import { addUserName, config, getData , getTotalTime } from "../appwrite/appwrite";
+import { addUserName, getData , getTotalTime } from "../appwrite/appwrite";
 import { useUser } from "@clerk/clerk-react";
 
 const Home = () => {
   const user = useUser()
   const [data, setData] = useState([]);
 
+  // for adding username 
   useEffect(() => {
     addUserName(user.user?.id ,user.user?.username )
    }, [user.user?.id, user.user?.username])
+
+
   useEffect(() => {
     const promisedData = async () => {
       try {
@@ -25,7 +28,6 @@ const Home = () => {
   }, []);
 
   const [totalTime, setTotalTime] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,9 +60,10 @@ const Home = () => {
   }, []);
   
 
+// console.log("sortedI" ,totalTime[1].position);
 
-const username = user.user?.username
-const id = user.user?.id
+const sortedData = [...totalTime].sort((a, b) => b.getTotalTime - a.getTotalTime);
+console.log("sortedIs" ,sortedData);
 
 
 
@@ -141,22 +144,24 @@ console.log();
           const text = Math.round(element.text/60)
           const json = Math.round(element.json/60)
           const markdown = Math.round(element.markdown/60)
-          const totalTime = Math.round(element.totalTime/60)
+          const totalTrackedTime = Math.round(element.totalTime/60)
 
-          
+console.log("HETM" ,data);
+
           
     return(
         <div 
-        key={element.$id}
+        key={index}
         className="  flex flex-row items-center  w-full mb-1  p-2 bg-gray-300 shadow-md  rounded-2xl ">
 
 {/* div-1 */}
 <div
 className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 >
-  <h1 className="font-semibold text-xl  ">#{index+1}</h1>
+  {/* <h1 className="font-semibold text-xl  ">#{postion}</h1> */}
+  <h1 className="font-semibold text-xl  ">#4</h1>
   <h1 className=" text-xl font-semibold">@{element.username}</h1>
-  <h1 className=" text-xl font-semibold ">{totalTime}</h1>
+  <h1 className=" text-xl font-semibold ">{totalTrackedTime}</h1>
 </div>
 
 {/* Div: 2 for languges bg-amber-500 */}
