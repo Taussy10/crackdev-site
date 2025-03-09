@@ -1,11 +1,16 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import { config, getData , getTotalTime } from "../appwrite/appwrite";
+import { addUserName, config, getData , getTotalTime } from "../appwrite/appwrite";
+import { useUser } from "@clerk/clerk-react";
 
 const Home = () => {
+  const user = useUser()
   const [data, setData] = useState([]);
 
+  useEffect(() => {
+    addUserName(user.user?.id ,user.user?.username )
+   }, [user.user?.id, user.user?.username])
   useEffect(() => {
     const promisedData = async () => {
       try {
@@ -54,10 +59,8 @@ const Home = () => {
   
 
 
-
-
-
-
+const username = user.user?.username
+const id = user.user?.id
 
 
 
@@ -117,6 +120,31 @@ console.log();
         {/* Here we go  */}
 
         {data.map((element, index) => {
+
+    // Making them in minute: 
+          const html = Math.round(element.html/60) 
+          const css = Math.round(element.css/60) 
+          const js = Math.round(element.js/60) 
+          const jsx = Math.round(element.jsx/60) 
+          const ts = Math.round(element.ts/60) 
+          const tsx = Math.round(element.tsx/60) 
+          const php = Math.round(element.php/60)
+          const swift = Math.round(element.swift/60)
+          const dart = Math.round(element.dart/60)
+          const java = Math.round(element.java/60)
+          const python = Math.round(element.python/60)
+          const rust = Math.round(element.rust/60)
+          const go = Math.round(element.go/60)
+          const c = Math.round(element.c/60)
+          const cpp = Math.round(element.cpp/60)
+          const csharp = Math.round(element.csharp/60)
+          const text = Math.round(element.text/60)
+          const json = Math.round(element.json/60)
+          const markdown = Math.round(element.markdown/60)
+          const totalTime = Math.round(element.totalTime/60)
+
+          
+          
     return(
         <div 
         key={element.$id}
@@ -127,8 +155,8 @@ console.log();
 className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 >
   <h1 className="font-semibold text-xl  ">#{index+1}</h1>
-  <h1 className=" text-xl font-semibold">@{element?.username}</h1>
-  <h1 className=" text-xl font-semibold ">{element?.totalTime}</h1>
+  <h1 className=" text-xl font-semibold">@{element.username}</h1>
+  <h1 className=" text-xl font-semibold ">{totalTime}</h1>
 </div>
 
 {/* Div: 2 for languges bg-amber-500 */}
@@ -138,7 +166,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 {/* Div for making flex row each component  */}
   <div className=" flex flex-row items-center flex-wrap gap-2 ">
   {
-          element?.html > 1? (
+          html > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#e34f26] rounded-3xl  p-2  w-auto "
@@ -147,14 +175,14 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             HTML
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.html}m
+            {html}m
             </h1>
           </div>
           ): ""
         }
        {/* CSS */}
        {
-          element?.css > 1? (
+          css > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#1572B6] rounded-3xl  p-2   w-auto "
@@ -163,7 +191,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             CSS
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.css}m
+            {css}m
             </h1>
           </div>
           ): ""
@@ -171,7 +199,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
       {/*JS  */}
         {
-          element?.js > 1? (
+          js > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#F7DF1E] rounded-3xl  p-2  w-auto "
@@ -180,7 +208,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             JS
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.js}m
+            {js}m
             </h1>
           </div>
           ): ""
@@ -188,7 +216,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
       {/*JSX  */}
         {
-          element?.jsx > 1? (
+          jsx > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#61DAFB] rounded-3xl  p-2  w-auto "
@@ -197,7 +225,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             JSX
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.jsx}m
+            {jsx}m
             </h1>
           </div>
           ): ""
@@ -206,7 +234,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*TS */}
 {
-          element?.ts > 1? (
+          ts > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#3178C6] rounded-3xl  p-2  w-auto "
@@ -215,7 +243,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             TS
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.ts}m
+            {ts}m
             </h1>
           </div>
           ): ""
@@ -223,7 +251,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*TSX */}
 {
-          element?.tsx > 1? (
+          tsx > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#3178C6] rounded-3xl  p-2  w-auto "
@@ -232,7 +260,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             TSX
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.tsx}m
+            {tsx}m
             </h1>
           </div>
           ): ""
@@ -241,7 +269,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*PHP */}
 {
-          element?.php > 1? (
+          php > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#777bb4] rounded-3xl  p-2  w-auto "
@@ -250,7 +278,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             PHP
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.php}m
+            {php}m
             </h1>
           </div>
           ): ""
@@ -258,7 +286,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*Swift */}
 {
-          element?.swift > 1? (
+          swift > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#fa7343] rounded-3xl  p-2  w-auto "
@@ -267,7 +295,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             Swift
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.swift}m
+            {swift}m
             </h1>
           </div>
           ): ""
@@ -275,7 +303,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*Dart */}
 {
-          element?.dart > 1? (
+          dart > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#0175c2] rounded-3xl  p-2  w-auto "
@@ -284,7 +312,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             Dart
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.dart}m
+            {dart}m
             </h1>
           </div>
           ): ""
@@ -292,7 +320,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*Java */}
 {
-          element?.java > 1? (
+          java > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#007396] rounded-3xl  p-2  w-auto "
@@ -301,7 +329,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             Java
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.java}m
+            {java}m
             </h1>
           </div>
           ): ""
@@ -310,7 +338,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*Pyhon */}
 {
-          element?.python > 1? (
+          python > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#3776AB] rounded-3xl  p-2  w-auto "
@@ -319,7 +347,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             Python
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.python}m
+            {python}m
             </h1>
           </div>
           ): ""
@@ -327,7 +355,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*Rust */}
 {
-          element?.rust > 1? (
+          rust > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#DEA584] rounded-3xl  p-2  w-auto "
@@ -336,7 +364,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             Rust
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.rust}m
+            {rust}m
             </h1>
           </div>
           ): ""
@@ -344,7 +372,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*Go */}
 {
-          element?.go > 1? (
+          go > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#00add8] rounded-3xl  p-2  w-auto "
@@ -353,7 +381,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             Go
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.go}m
+            {go}m
             </h1>
           </div>
           ): ""
@@ -361,7 +389,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*C*/}
 {
-          element?.c > 1? (
+          c > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#a8b9cc] rounded-3xl  p-2  w-auto "
@@ -370,7 +398,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             C
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.c}m
+            {c}m
             </h1>
           </div>
           ): ""
@@ -378,7 +406,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*CPP */}
 {
-          element?.cpp > 1? (
+          cpp > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#0059cc] rounded-3xl  p-2  w-auto "
@@ -387,7 +415,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             C++
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.cpp}m
+            {cpp}m
             </h1>
           </div>
           ): ""
@@ -395,7 +423,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*Csharp */}
 {
-          element?.csharp > 1? (
+          csharp > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#239120] rounded-3xl  p-2  w-auto "
@@ -404,7 +432,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             C#
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.sharp}m
+            {sharp}m
             </h1>
           </div>
           ): ""
@@ -412,7 +440,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*Text */}
 {
-          element?.text > 1? (
+          text > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#808080] rounded-3xl  p-2  w-auto "
@@ -421,7 +449,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             Text
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.text}m
+            {text}m
             </h1>
           </div>
           ): ""
@@ -429,7 +457,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*JSON */}
 {
-          element?.json > 1? (
+          json > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
      bg-[#CB3837] rounded-3xl  p-2  w-auto "
@@ -438,7 +466,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             JSON
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.json}m
+            {json}m
             </h1>
           </div>
           ): ""
@@ -446,7 +474,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 
 {/*markdown */}
 {
-          element?.markdown > 1? (
+          markdown > 1? (
           <div
             className=" flex flex-row  gap-1    justify-center items-center
      bg-[#000000] rounded-3xl  p-2  w-auto "
@@ -455,7 +483,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             Markdown
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {element.markdown}m
+            {markdown}m
             </h1>
           </div>
           ): ""

@@ -53,3 +53,24 @@ export const getTotalTime = async() =>{
         
     }
 }
+
+export const addUserName = async(id:any, username: string) =>{
+    try {
+        const addUser = await databases.updateDocument(
+            config.databasesId,
+            config.collectionId,
+            id,
+            {
+                "username": username 
+            }
+        ) 
+        console.log("Promise from appwrite.ts " ,addUser);
+        
+    
+    } catch (error:any) {
+        console.log("Error from appwrite.ts",error);
+        throw new Error(error.message)
+        
+        
+    }
+}

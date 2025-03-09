@@ -1,41 +1,18 @@
 import image from "../assets/react.svg"
 import { SignInButton} from "@clerk/clerk-react"
 import { useSignIn  , useUser} from "@clerk/clerk-react"
-import { useEffect , useState } from "react"
-import { getTotalTime  } from "../appwrite/appwrite"
 
-const Header = () => {
+
+const Header = ({username}) => {
   const user = useUser()
   const signedIn = useSignIn()
 
-  const [totalTime, setTotalTime] = useState([]);
+// const username = user.user?.username
+  console.log("username :" ,user.user?.username);
+  console.log("Id :" ,user.user?.id);
 
-  useEffect(() => {
-    const promisedData = async () => {
-      try {
-        const result = await getTotalTime();
-        // stored them in array
-        setTotalTime(result);
-      } catch (error: any) {
-        console.log(error);
-        throw new Error(error.message);
-      }
-    };
-    promisedData();
-  }, []);
-
-
-
-
-
-
-  totalTime.map((element) => {
-    console.log("Element", element);
-    
-  })
-  
-  
   return (
+
     <div className=" flex flex-row items-center  justify-between
     bg-red-500  px-6 py-2 ">
 
@@ -43,9 +20,9 @@ const Header = () => {
   <div className="  flex flex-row items-center gap-3 ">
 <h1 className=" text-5xl font-bold text-amber-500 ">Crackdev</h1>
 <img src={image} 
-className="  size-12"
-/>  
-    </div>
+className="size-12"/>  
+
+ </div>
 
 {/* For button */}
 <div
