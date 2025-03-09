@@ -1,4 +1,4 @@
-import { Client, Account, Databases, } from "appwrite";
+import { Client, Account, Databases, Query, } from "appwrite";
 
 let client = new Client()
 let account = new Account(client)
@@ -21,6 +21,27 @@ export const getData = async() =>{
         const promise = await databases.listDocuments(
             config.databasesId,
             config.collectionId,
+        ) 
+        console.log("Promise from appwrite.ts " ,promise.documents);
+        
+        return promise.documents
+    } catch (error:any) {
+        console.log(error);
+        throw new Error(error.message)
+        
+        
+    }
+}
+
+export const getTotalTime = async() =>{
+    try {
+        const promise = await databases.listDocuments(
+            config.databasesId,
+            config.collectionId,
+            [
+                Query.select(["totalTime", "username"])
+            ]
+
         ) 
         console.log("Promise from appwrite.ts " ,promise.documents);
         

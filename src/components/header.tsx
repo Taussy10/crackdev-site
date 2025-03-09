@@ -1,16 +1,38 @@
 import image from "../assets/react.svg"
 import { SignInButton} from "@clerk/clerk-react"
 import { useSignIn  , useUser} from "@clerk/clerk-react"
-
+import { useEffect , useState } from "react"
+import { getTotalTime  } from "../appwrite/appwrite"
 
 const Header = () => {
   const user = useUser()
   const signedIn = useSignIn()
 
-  // console.log("name",user.user?.id)
-  
-  
-  
+  const [totalTime, setTotalTime] = useState([]);
+
+  useEffect(() => {
+    const promisedData = async () => {
+      try {
+        const result = await getTotalTime();
+        // stored them in array
+        setTotalTime(result);
+      } catch (error: any) {
+        console.log(error);
+        throw new Error(error.message);
+      }
+    };
+    promisedData();
+  }, []);
+
+
+
+
+
+
+  totalTime.map((element) => {
+    console.log("Element", element);
+    
+  })
   
   
   return (

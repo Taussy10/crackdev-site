@@ -1,143 +1,29 @@
-import Header from "../components/header";
-import Footer from "../components/footer";
-import { useEffect, useState } from "react";
-import { config, getData , getTotalTime } from "../appwrite/appwrite";
-
-const Home = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const promisedData = async () => {
-      try {
-        const result = await getData();
-        setData(result);
-      } catch (error: any) {
-        console.log(error);
-        throw new Error(error.message);
-      }
-    };
-    promisedData();
-  }, []);
-
-  const [totalTime, setTotalTime] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getTotalTime();
-  
-        // Sorting users based on totalTime (Descending Order)
-        let sortedData = result
-          .map((user) => ({
-            ...user,
-            totalTime: user.totalTime || 0, // Handle missing data
-          }))
-          .sort((a, b) => b.totalTime - a.totalTime);
-  
-        // Assign ranks (handling ties)
-        let rank = 1;
-        sortedData = sortedData.map((user, index) => {
-          if (index > 0 && user.totalTime < sortedData[index - 1].totalTime) {
-            rank = index + 1; // Only increase rank when the value changes
-          }
-          return { ...user, position: rank };
-        });
-  
-        setTotalTime(sortedData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
-    fetchData();
-  }, []);
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  console.log("Data from home.tsx", data);
-console.log();
-
-  return (
-    <div className="  ">
-      <Header />
-
-      {/* Content div will contain
-      label div
-      */}
-
-      {/* Create two divs
-    1. for postion , user and time 
-    2. for Langugage 
-    */}
-
-      {/* Container for content bg-green-500 */}
-      <div className=" mt-4  px-6 ">
-        
-        
-
-        {/* label div container */}
-        {/* 
-        Lablel div container will contain
-       div-1: position , username and language 
-       div-2: Language
-        */}
-        <div className=" flex flex-row items-center  w-full mb-1  p-2 bg-gray-700 shadow-md  rounded-2xl ">
-
-          {/* div-1 */}
-          <div
-   className="  flex flex-row  items-center  w-xl  justify-between  bg-green-500   p-2  "
-          >
-            <h1 className="font-bold text-2xl">Position</h1>
-            <h1 className="font-bold text-2xl">User</h1>
-            <h1 className="font-bold  text-2xl">Time</h1>
-          </div>
-
-          {/* Div: 2 for languges bg-amber-500 */}
-          <div className="  w-full   p-2 text-center">
-            <h1 className="font-bold text-2xl">Language</h1>
-          </div>
-        </div>
-
-        
-
-        {/* Here we go  */}
-
-        {data.map((element, index) => {
+{data.map((element, index) => {
     return(
-        <div 
-        key={element.$id}
-        className="  flex flex-row items-center  w-full mb-1  p-2 bg-gray-300 shadow-md  rounded-2xl ">
-
-{/* div-1 */}
-<div
-className="  flex flex-row  items-center  w-xl  justify-between px-2   "
->
-  <h1 className="font-semibold text-xl  ">#{index+1}</h1>
-  <h1 className=" text-xl font-semibold">@{element?.username}</h1>
-  <h1 className=" text-xl font-semibold ">{element?.totalTime}</h1>
-</div>
-
-{/* Div: 2 for languges bg-amber-500 */}
-<div className="  w-full   p-2 text-center ml-7 " >
+    <div
+    key={index}
+      className=" flex bg-[#eeeeee]   shadow-lg flex-row items-center  px-4 mb-2.5 rounded-xl"
+      // className=" flex flex-row items-center  w-full mb-1  p-2 bg-gray-700 shadow-md  rounded-2xl "
+        >
 
 
-{/* Div for making flex row each component  */}
-  <div className=" flex flex-row items-center flex-wrap gap-2 ">
-  {
+      
+      <div  
+      // className="  flex flex-row items-center  bg-orange-400   w-96  justify-between"
+      className="  flex flex-row   bg-green-500 items-center  justify-between  p-2  "
+      >
+        <h1 className="font-semibold text-xl  ">#1</h1>
+        <h1 className=" text-xl font-semibold">
+          @{element?.username}
+        </h1>
+        <h1 className=" text-xl font-semibold ">{element?.totalTime}</h1>
+      </div>
+
+{/* ml-48 */}
+      <div className="   bg-blue-500  p-2 text-center ">
+        <div className=" flex flex-row items-center gap-2 ">
+        
+        {
           element?.html > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
@@ -152,8 +38,10 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
           </div>
           ): ""
         }
-       {/* CSS */}
-       {
+
+
+{/* CSS */}
+        {
           element?.css > 1? (
           <div
             className=" flex flex-row  gap-1 justify-center items-center
@@ -461,23 +349,12 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
           ): ""
         }
 
-  </div>
-  
-</div>
-</div> 
-
-)})}
 
 
 
+        </div>
 
-    
-        {/* add here container from home */}
+        {/* Divs for languages */}
       </div>
-
-      <Footer />
     </div>
-  );
-};
-
-export default Home;
+  )})}
