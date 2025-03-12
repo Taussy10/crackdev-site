@@ -1,7 +1,7 @@
 import { Client, Account, Databases, Query, } from "appwrite";
 
+
 let client = new Client()
-let account = new Account(client)
 let databases = new Databases(client)
 
 export const config = {
@@ -16,6 +16,8 @@ export const config = {
 client.setEndpoint(config.endpoint)
 .setProject(config.projectId)
 
+
+// Get all documents 
 export const getData = async() =>{
     try {
         const promise = await databases.listDocuments(
@@ -33,6 +35,8 @@ export const getData = async() =>{
     }
 }
 
+
+// Get all the totalTime 
 export const getTotalTime = async() =>{
     try {
         const promise = await databases.listDocuments(
@@ -54,6 +58,7 @@ export const getTotalTime = async() =>{
     }
 }
 
+// Update username in document 
 export const addUserName = async(id:any, username: string) =>{
     try {
         const addUser = await databases.updateDocument(
@@ -74,3 +79,4 @@ export const addUserName = async(id:any, username: string) =>{
         
     }
 }
+

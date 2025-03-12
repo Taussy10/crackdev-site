@@ -1,18 +1,19 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { addUserName, getData , getTotalTime } from "../appwrite/appwrite";
 import { useUser } from "@clerk/clerk-react";
 
 const Home = () => {
   const user = useUser()
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<[]| undefined>([]);
 
   // for adding username 
   useEffect(() => {
     addUserName(user.user?.id ,user.user?.username )
    }, [user.user?.id, user.user?.username])
 
+   
 
   useEffect(() => {
     const promisedData = async () => {
@@ -122,7 +123,7 @@ console.log();
 
         {/* Here we go  */}
 
-        {data.map((element, index) => {
+        {data.map((element:{}, index) => {
 
     // Making them in minute: 
           const html = Math.round(element.html/60) 

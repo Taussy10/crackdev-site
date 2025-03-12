@@ -7,6 +7,8 @@ const Header = () => {
   const user = useUser()
   const signedIn = useSignIn()
 
+const id = user.user?.id
+
 // const username = user.user?.username
   console.log("username :" ,user.user?.username);
   console.log("Id :" ,user.user?.id);
@@ -23,12 +25,20 @@ const Header = () => {
 className="size-12"/>  
 
  </div>
-
-{/* For button */}
+{
+user.isSignedIn === false ? (
 <div
 className="   flex flex-row items-center justify-center h-10 p-2 w-24 bg-amber-500 rounded-xl">
 <SignInButton />
 </div>
+): (
+  <div
+  className="   flex flex-row items-center justify-center h-10 p-2 w-auto bg-amber-500 rounded-xl">
+  <h1 className=" text-white">{id}</h1>
+  </div>
+)
+}
+
 
 
     </div>

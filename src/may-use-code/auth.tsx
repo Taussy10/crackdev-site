@@ -1,8 +1,8 @@
 import React from 'react'
-
+import { SignIn } from '@clerk/clerk-react'
 const Auth = () => {
   const twitterSignIn = async() => {
-    const sign =  await  signedIn.signIn?.authenticateWithRedirect({
+    const sign =  await  SignIn.signIn?.authenticateWithRedirect({
       strategy: 'oauth_twitter',
       redirectUrl: 'http://localhost:5173/',
       redirectUrlComplete: ""
