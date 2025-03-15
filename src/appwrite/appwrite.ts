@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Query, } from "appwrite";
+import { Client, Databases,  Query, } from "appwrite";
 
 
 let client = new Client()
@@ -18,7 +18,7 @@ client.setEndpoint(config.endpoint)
 
 
 // Get all documents 
-export const getData = async() =>{
+export const getData = async()=>{
     try {
         const promise = await databases.listDocuments(
             config.databasesId,
@@ -47,7 +47,7 @@ export const getTotalTime = async() =>{
             ]
 
         ) 
-        console.log("Promise from appwrite.ts " ,promise.documents);
+        console.log("getTotalTime from appwrite.ts " ,promise.documents);
         
         return promise.documents
     } catch (error:any) {
@@ -59,24 +59,31 @@ export const getTotalTime = async() =>{
 }
 
 // Update username in document 
-export const addUserName = async(id:any, username: string) =>{
-    try {
-        const addUser = await databases.updateDocument(
-            config.databasesId,
-            config.collectionId,
-            id,
-            {
-                "username": username 
-            }
-        ) 
-        console.log("Promise from appwrite.ts " ,addUser);
+// export const addUserName = async(id:string|undefined , username: string|undefined|null) =>{
+   
+//     try {
+        
+//         const addUser = await databases.updateDocument(
+//             config.databasesId,
+//             config.collectionId,
+//             // why use type assertation ? 
+//             //  cause by params id can conting undefined or string 
+//             // updateDocument need only string no undefined
+//             // so either check it by if statement or jabardasti give type
+//             id as string,
+//             // "user_2u4sfqP3WoZP3vr2matwdbqy51y",
+//             {
+//                 "username": username 
+//             }
+//         ) 
+//         console.log("Promise from appwrite.ts " ,addUser);
         
     
-    } catch (error:any) {
-        console.log("Error from appwrite.ts",error);
-        throw new Error(error.message)
+//     } catch (error:any) {
+//         console.log("Error from appwrite.ts",error);
+//         throw new Error(error.message)
         
         
-    }
-}
+//     }
+// }
 

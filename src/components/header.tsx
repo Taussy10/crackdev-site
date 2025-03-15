@@ -5,13 +5,13 @@ import { useSignIn  , useUser} from "@clerk/clerk-react"
 
 const Header = () => {
   const user = useUser()
-  const signedIn = useSignIn()
+ 
 
 const id = user.user?.id
 
 // const username = user.user?.username
-  console.log("username :" ,user.user?.username);
-  console.log("Id :" ,user.user?.id);
+  // console.log("username :" ,user.user?.username);
+  // console.log("Id :" ,user.user?.id);
 
   return (
 

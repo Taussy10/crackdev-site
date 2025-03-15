@@ -1,17 +1,22 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { addUserName, getData , getTotalTime } from "../appwrite/appwrite";
-import { useUser } from "@clerk/clerk-react";
+import { SignIn, useUser } from "@clerk/clerk-react";
+import { Models } from "appwrite";
 
 const Home = () => {
   const user = useUser()
-  const [data, setData] = useState<[]| undefined>([]);
+  // this useState can contain two types 
+  // 1. one a array 2. Models.Document types(that we will get after compeltion of promise)
+  const [data, setData] = useState<[]| Models.Document[]>([]);
 
   // for adding username 
-  useEffect(() => {
-    addUserName(user.user?.id ,user.user?.username )
-   }, [user.user?.id, user.user?.username])
+  // useEffect(() => {
+  //   addUserName( user.user?.id ,user.user?.username )
+  //  }, [user.user?.id, user.user?.username])
+
+console.log( "ID", user.user?.id );
 
    
 
@@ -28,30 +33,13 @@ const Home = () => {
     promisedData();
   }, []);
 
-  const [totalTime, setTotalTime] = useState([]);
+  const [totalTime, setTotalTime] = useState<Models.Document[]>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await getTotalTime();
-  
-        // Sorting users based on totalTime (Descending Order)
-        let sortedData = result
-          .map((user) => ({
-            ...user,
-            totalTime: user.totalTime || 0, // Handle missing data
-          }))
-          .sort((a, b) => b.totalTime - a.totalTime);
-  
-        // Assign ranks (handling ties)
-        let rank = 1;
-        sortedData = sortedData.map((user, index) => {
-          if (index > 0 && user.totalTime < sortedData[index - 1].totalTime) {
-            rank = index + 1; // Only increase rank when the value changes
-          }
-          return { ...user, position: rank };
-        });
-  
-        setTotalTime(sortedData);
+        setTotalTime(result.sort((a, b) => a.totalTime - b.totalTime)); // ✅ Sort before setting state
       } catch (error) {
         console.error(error);
       }
@@ -60,23 +48,36 @@ const Home = () => {
     fetchData();
   }, []);
   
+  totalTime.forEach((element) => console.log("Element:", element.totalTime)); // ✅ Now it's sorted
 
-// console.log("sortedI" ,totalTime[1].position);
-
-const sortedData = [...totalTime].sort((a, b) => b.getTotalTime - a.getTotalTime);
-console.log("sortedIs" ,sortedData);
-
-
-
-
+ 
+  const filteredData = data.filter((element)=> 
+     element.totalTime/60 >1
+    // console.log("Filter :", )
+  )
 
 
+  const sortedData = filteredData.sort(function (a,b) {
+    // You have to return data
+    return a.totalTime - b.totalTime
+  })
+  console.log("SortedData :" ,sortedData);
+  
+  
+  
 
 
 
 
-  console.log("Data from home.tsx", data);
-console.log();
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="  ">
@@ -123,7 +124,7 @@ console.log();
 
         {/* Here we go  */}
 
-        {data.map((element:{}, index) => {
+        {sortedData.map((element,index) => {
 
     // Making them in minute: 
           const html = Math.round(element.html/60) 
@@ -147,7 +148,7 @@ console.log();
           const markdown = Math.round(element.markdown/60)
           const totalTrackedTime = Math.round(element.totalTime/60)
 
-console.log("HETM" ,data);
+
 
           
     return(
@@ -160,8 +161,16 @@ console.log("HETM" ,data);
 className="  flex flex-row  items-center  w-xl  justify-between px-2   "
 >
   {/* <h1 className="font-semibold text-xl  ">#{postion}</h1> */}
-  <h1 className="font-semibold text-xl  ">#4</h1>
+  <h1 className="font-semibold text-xl  ">#{index +1}</h1>
+
+  <div className=" flex  flex-row justify-center items-center gap-2">
+  <img src={user.user?.imageUrl} 
+  className=" size-12 rounded-full "
+  />
+
   <h1 className=" text-xl font-semibold">@{element.username}</h1>
+  </div>
+
   <h1 className=" text-xl font-semibold ">{totalTrackedTime}</h1>
 </div>
 
@@ -438,7 +447,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
             C#
             </h1>
             <h1 className=" text-white font-semibold text-base">
-            {sharp}m
+            {csharp}m
             </h1>
           </div>
           ): ""
