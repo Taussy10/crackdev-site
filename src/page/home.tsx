@@ -2,7 +2,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import { addUserName, getData , getTotalTime } from "../appwrite/appwrite";
-import { SignIn, useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import { Models } from "appwrite";
 
 const Home = () => {
@@ -13,10 +13,18 @@ const Home = () => {
 
   // for adding username 
   // useEffect(() => {
-  //   addUserName( user.user?.id ,user.user?.username )
+  //   async function add() {
+  //     try {
+  //      await addUserName( user.user?.id ,user.user?.username ,user.user?.imageUrl )
+  //     } catch (error:any) {
+  //       console.log("Error from home.tsx :", error);
+  //       throw new Error(error.message)
+  //     }
+  //   }
+  //  add()
   //  }, [user.user?.id, user.user?.username])
 
-console.log( "ID", user.user?.id );
+// console.log( "ID", user.user?.id );
 
    
 
@@ -32,24 +40,6 @@ console.log( "ID", user.user?.id );
     };
     promisedData();
   }, []);
-
-  const [totalTime, setTotalTime] = useState<Models.Document[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getTotalTime();
-        setTotalTime(result.sort((a, b) => a.totalTime - b.totalTime)); // ✅ Sort before setting state
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
-    fetchData();
-  }, []);
-  
-  totalTime.forEach((element) => console.log("Element:", element.totalTime)); // ✅ Now it's sorted
-
  
   const filteredData = data.filter((element)=> 
      element.totalTime/60 >1
@@ -61,7 +51,7 @@ console.log( "ID", user.user?.id );
     // You have to return data
     return a.totalTime - b.totalTime
   })
-  console.log("SortedData :" ,sortedData);
+  // console.log("SortedData :" ,sortedData);
   
   
   
@@ -164,9 +154,9 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
   <h1 className="font-semibold text-xl  ">#{index +1}</h1>
 
   <div className=" flex  flex-row justify-center items-center gap-2">
-  <img src={user.user?.imageUrl} 
+   <img src={element.avatar} 
   className=" size-12 rounded-full "
-  />
+  /> 
 
   <h1 className=" text-xl font-semibold">@{element.username}</h1>
   </div>

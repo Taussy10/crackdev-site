@@ -59,31 +59,32 @@ export const getTotalTime = async() =>{
 }
 
 // Update username in document 
-// export const addUserName = async(id:string|undefined , username: string|undefined|null) =>{
+export const addUserName = async(id:string|undefined , username: string|undefined|null, avatar:string|undefined|null,) =>{
    
-//     try {
+    try {
         
-//         const addUser = await databases.updateDocument(
-//             config.databasesId,
-//             config.collectionId,
-//             // why use type assertation ? 
-//             //  cause by params id can conting undefined or string 
-//             // updateDocument need only string no undefined
-//             // so either check it by if statement or jabardasti give type
-//             id as string,
-//             // "user_2u4sfqP3WoZP3vr2matwdbqy51y",
-//             {
-//                 "username": username 
-//             }
-//         ) 
-//         console.log("Promise from appwrite.ts " ,addUser);
+        const addUser = await databases.updateDocument(
+            config.databasesId,
+            config.collectionId,
+            // why use type assertation ? 
+            //  cause by params id can conting undefined or string 
+            // updateDocument need only string no undefined
+            // so either check it by if statement or jabardasti give type
+            id ,
+            // "user_2u4sfqP3WoZP3vr2matwdbqy51y",
+            {
+                "username": username, 
+                "avatar": avatar 
+            }
+        ) 
+        console.log("Promise from appwrite.ts " ,addUser);
         
     
-//     } catch (error:any) {
-//         console.log("Error from appwrite.ts",error);
-//         throw new Error(error.message)
+    } catch (error:any) {
+        console.log("Error from appwrite.ts",error);
+        throw new Error(error.message)
         
         
-//     }
-// }
+    }
+}
 
