@@ -25,14 +25,14 @@ const Home = () => {
      element.totalTime/60 >1
     // console.log("Filter :", )
   )
-console.log("toatlTIme :" ,data);
+
 
 
   const sortedData = filteredData?.sort(function (a,b) {
     // You have to return data
-    return a.totalTime - b.totalTime
+    return b.totalTime -  a.totalTime 
   })
-  // console.log("SortedData :" ,sortedData);
+
   
   
   

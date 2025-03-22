@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@clerk/react-router": "^1.1.4",
     "@supabase/supabase-js": "^2.49.1",
     "@tailwindcss/vite": "^4.0.9",
     "react": "^19.0.0",
