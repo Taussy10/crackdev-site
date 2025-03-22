@@ -1,37 +1,15 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import { addUserName, getData , getTotalTime } from "../appwrite/appwrite";
-import { useUser } from "@clerk/clerk-react";
-import { Models } from "appwrite";
+import { getAllUser } from "../supabase/supabase";
 
 const Home = () => {
-  const user = useUser()
-  // this useState can contain two types 
-  // 1. one a array 2. Models.Document types(that we will get after compeltion of promise)
-  const [data, setData] = useState<[]| Models.Document[]>([]);
-
-  // for adding username 
-  // useEffect(() => {
-  //   async function add() {
-  //     try {
-  //      await addUserName( user.user?.id ,user.user?.username ,user.user?.imageUrl )
-  //     } catch (error:any) {
-  //       console.log("Error from home.tsx :", error);
-  //       throw new Error(error.message)
-  //     }
-  //   }
-  //  add()
-  //  }, [user.user?.id, user.user?.username])
-
-// console.log( "ID", user.user?.id );
-
-   
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const promisedData = async () => {
       try {
-        const result = await getData();
+        const result = await getAllUser();
         setData(result);
       } catch (error: any) {
         console.log(error);
@@ -41,13 +19,16 @@ const Home = () => {
     promisedData();
   }, []);
  
-  const filteredData = data.filter((element)=> 
+  console.log("Datas from supbase :" , data);
+  
+  const filteredData = data?.filter((element)=> 
      element.totalTime/60 >1
     // console.log("Filter :", )
   )
+console.log("toatlTIme :" ,data);
 
 
-  const sortedData = filteredData.sort(function (a,b) {
+  const sortedData = filteredData?.sort(function (a,b) {
     // You have to return data
     return a.totalTime - b.totalTime
   })
@@ -114,7 +95,7 @@ const Home = () => {
 
         {/* Here we go  */}
 
-        {sortedData.map((element,index) => {
+        {sortedData?.map((element,index) => {
 
     // Making them in minute: 
           const html = Math.round(element.html/60) 
@@ -158,7 +139,7 @@ className="  flex flex-row  items-center  w-xl  justify-between px-2   "
   className=" size-12 rounded-full "
   /> 
 
-  <h1 className=" text-xl font-semibold">@{element.username}</h1>
+  <h1 className=" text-xl font-semibold">@{element.userName}</h1>
   </div>
 
   <h1 className=" text-xl font-semibold ">{totalTrackedTime}</h1>
