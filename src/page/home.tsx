@@ -20,7 +20,8 @@ const Home = () => {
   }, []);
  
   console.log("Datas from supbase :" , data);
-  
+
+
   const filteredData = data?.filter((element)=> 
      element.totalTime/60 >1
     // console.log("Filter :", )
@@ -42,7 +43,9 @@ const Home = () => {
 
 
 
-
+  // write a function to
+// find all images without alternate text
+// and give them a red border                                                                                                                                                                                         
 
 
 
